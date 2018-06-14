@@ -54,7 +54,7 @@ smiling_button.grid(row=1, column=0)
 nonsmiling_button = tk.Button(window, text="Not Smiling", command=lambda x=False: update_smiling(x))
 nonsmiling_button.grid(row=1, column=1)
 
-display_face(trainer.imgs[trainer.index])
+display_face(trainer.imgs[trainer.index]*256)
 
 window.mainloop()
 
