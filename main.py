@@ -5,11 +5,9 @@ from PIL import Image, ImageTk
 import trainer
 import json
 
-"""
 rs = json.load(open("results.xml"))
 trn = trainer.Trainer()
 trn.results = rs
-"""
 
 window = tk.Tk()
 window.wm_title("Smile Recognition")
