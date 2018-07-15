@@ -48,17 +48,22 @@ def display_face(face):
 def update_smiling(b):
     trainer.record_result(smile=b)
     trainer.increment_face()
+    display_face(trainer.imgs[trainer.index]*256)
+
+
+def save():
+    with open("results.xml", "w") as f:
+        json.dump(trainer.results, f)
+    print "Saved..."
+
 
 smiling_button = tk.Button(window, text="Smiling", command=lambda x=True: update_smiling(x))
 smiling_button.grid(row=1, column=0)
 nonsmiling_button = tk.Button(window, text="Not Smiling", command=lambda x=False: update_smiling(x))
 nonsmiling_button.grid(row=1, column=1)
+save_button = tk.Button(window, text="Save", command=save)
+save_button.grid(row=1, column=2)
 
 display_face(trainer.imgs[trainer.index]*256)
 
 window.mainloop()
-
-""""
-with open("results.xml", "w") as f:
-    json.dump(trainer.results, f)
-"""
