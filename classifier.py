@@ -45,8 +45,8 @@ def train_evaluate(clf, x_train, x_test, y_train, y_test):
     print (metrics.confusion_matrix(y_test, y_pred))
 
 
-def predict(x_test):
-    y_pred = clf.predict(x_test)
+def predict(test):
+    y_pred = clf.predict(test)
     return y_pred
 
 
