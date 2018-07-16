@@ -1,7 +1,9 @@
 import cv2
 import Tkinter as tk
 from PIL import Image, ImageTk
+import numpy as np
 import classifier
+from scipy.ndimage import zoom
 
 window = tk.Tk()
 window.wm_title("Smile Recognition")
@@ -21,13 +23,24 @@ cap = cv2.VideoCapture(0)
 def show_frame():
     _, frame = cap.read()
     frame = cv2.flip(frame, 1)
-    cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
     filename = "/home/brkkrgl/PycharmProjects/Smile-Recognition/lbpcascade_frontalface.xml"
-    classifier = cv2.CascadeClassifier(filename)
-    faces = classifier.detectMultiScale(cv2image)
+    clf = cv2.CascadeClassifier(filename)
+    faces = clf.detectMultiScale(cv2image)
     for x, y, w, h in faces:
-        cv2.rectangle(cv2image, (x, y), (x+w, y+h), (255,0,0), 2)
+        cv2.rectangle(cv2image, (x, y), (x + w, y + h), (255, 0, 0), 2)
+
+        horizontal_offset = 0.15 * w
+        vertical_offset = 0.2 * h
+        extracted_face = cv2image[int(y + vertical_offset):int(y + h), int(x + horizontal_offset):int(x - horizontal_offset + w)]
+
+        face = zoom(extracted_face, (64. / extracted_face.shape[0], 64. / extracted_face.shape[1]))
+        face = face.astype(np.float32)
+        if len(classifier.predict(face)) != 0:
+            text.config(text="True")
+        else:
+            text.config(text="False")
 
     img = Image.fromarray(cv2image)
     imgtk = ImageTk.PhotoImage(image=img)
