@@ -26,7 +26,7 @@ def show_frame():
     frame = cv2.flip(frame, 1)
     cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-    filename = "/home/brkkrgl/PycharmProjects/Smile-Recognition/lbpcascade_frontalface.xml"
+    filename = "lbpcascade_frontalface.xml"
     clf = cv2.CascadeClassifier(filename)
     faces = clf.detectMultiScale(cv2image)
 
