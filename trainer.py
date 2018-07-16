@@ -12,7 +12,6 @@ class Trainer:
     def __init__(self):
         self.results = {}
         self.imgs = face_dataset.images
-
         self.index = 0
 
     def increment_face(self):

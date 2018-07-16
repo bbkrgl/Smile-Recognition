@@ -1,13 +1,7 @@
-import numpy as np
 import cv2
 import Tkinter as tk
 from PIL import Image, ImageTk
-import trainer
-import json
-
-rs = json.load(open("results.xml"))
-trn = trainer.Trainer()
-trn.results = rs
+import classifier
 
 window = tk.Tk()
 window.wm_title("Smile Recognition")
