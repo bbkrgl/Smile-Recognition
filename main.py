@@ -1,7 +1,6 @@
 import cv2
 import Tkinter as tk
 from PIL import Image, ImageTk
-import numpy as np
 import classifier as svm
 from scipy.ndimage import zoom
 
